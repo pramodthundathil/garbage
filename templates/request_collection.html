@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% block  content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="content" style="margin-top: 200px;">
+        <form  method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-primary btn-lg">Create Collection Requests</button>
+        </form>
+    </div>
+    <div class="container mt-5">
+        <h5 class="text-secondary">Pending Collection requests</h5>
+        {% for i in requs %}
+
+        <div class="card" style="padding: 20px; margin: 20px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><i>Requested on: </i> {{i.request_date}}</p>
+                    <p><i>Status: </i> {{i.garbage_status}}</p>
+                    <p><i>Number Of Items: </i>{{i.garbage_request.count}}</p>
+                </div>
+                <div class="col-md-6">
+                    <a href="{%url 'add_items_to_request' i.id %}" class="btn btn-dark btn-sm">View Details</a>
+
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

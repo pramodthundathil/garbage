@@ -1,0 +1,70 @@
+{% extends 'staff/index_driver.html' %}
+{% block driver %}
+<style>
+    .items span {
+        display: block;
+        font-size: medium;
+        color: blue;
+    }
+
+    .item-container {
+        display: flex;
+        justify-content: space-evenly;
+        padding: 20px;
+        border-radius: 30px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+</style>
+
+<div class="container mt-5" >
+    <h3>Collection Requests Pending </h3>
+
+    {% for i in req %}
+
+    <div class="card mt-3 ">
+        <div class="item-container">
+            <div class="items">
+                <span>Address:</span>
+                <address>
+                    {{i.requested_by.client_user.address}} <br>
+                    {{i.requested_by.client_user.location}}
+
+                </address>
+                <span>Status</span>
+                <h3 style="text-transform: uppercase;">{{i.garbage_status}}</h3>
+                <span>Collected Date:</span>
+                <p>{{i.collected_time}}</p>
+            </div>
+            <div class="items">
+                <span>Garbage Details:</span>
+                <p>Collection-date: <span>{{i.collection_date_time}}</span>
+                </p>
+                <p>
+                    Garbages: <span>
+                        {% for j in i.garbage_request.all %}
+                        <ul>
+                            <li>{{j.garbage_item}}
+                                <ul>
+                                    <li>{{j.weight}} KG</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                    </span>
+                </p>
+            </div>
+            <div class="items">
+                <span>Actions</span>
+
+                <a href="{%url 'mark_collection_in_progress' i.id %}" class="btn btn-warning">Mark collection In progress</a> <br><br>
+                <a href="{%url 'mark_collection_collected' i.id %}" class="btn btn-info">Take Garbage</a> <br><br>
+                <!-- <a href="" class="btn btn-success">Deposit To vault</a><br><br> -->
+
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

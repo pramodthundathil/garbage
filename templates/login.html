@@ -1,0 +1,170 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Garbage Management | Landing, Responsive &amp; </title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{%static 'assets/img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{%static 'assets/img/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{%static 'assets/img/favicons/favicon-16x16.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{%static 'assets/img/favicons/favicon.ico' %}">
+    <link rel="manifest" href="{%static 'assets/img/favicons/manifest.json' %}">
+    <meta name="msapplication-TileImage" content="{%static 'assets/img/favicons/mstile-150x150.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="{%static 'assets/css/theme.css' %}" rel="stylesheet" />
+
+  </head>
+
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <!-- data-navbar-on-scroll="data-navbar-on-scroll" -->
+    <main class="main" id="top">
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-4 d-block" data-navbar-on-scroll="data-navbar-on-scroll"  >
+        <div class="container"><a class="navbar-brand" href="{%url 'HomePage'%}">Garbage Management</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent" >
+            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-dark fw-medium active" aria-current="page" href="#home">Home</a></li>
+              <!-- <li class="nav-item px-2" data-anchor="data-anchor"><a  class="nav-link text-dark" href="#aboutUs">About us</a></li>
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-dark" href="#clients">Clients</a></li> -->
+              <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link text-dark" href="#faq">Faq</a></li>
+            </ul>
+            <form class="ps-lg-5"><a class="btn btn-primary order-1 order-lg-0" href="#!">CONTACT US</a></form>
+          </div>
+        </div>
+      </nav>
+
+      <section id="home">
+        <div class="bg-holder" style="background-image: url('{% static "assets/img/gallery/header-bg.png" %}'); background-position: center; background-size: cover;">
+            <div style="margin-top:100px"></div>
+            <div class="container">
+                <div class="row flex-center" >
+                    <div class="col-md-6 col-lg-5 text-center text-md-start " data-aos="fade-up" style="padding: 20px;border: .5px solid gary;background-color: aliceblue;opacity: .8; border-radius: 10px;z-index: 1;">
+                        <h3 class="text-center">Login</h3>
+                        {% for message in messages %}
+                        <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                          <strong>Hai!</strong> {{message}}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <form class="row g-3 align-items-center" method="post">
+                          {% csrf_token %}
+                          <div class="mb-3">
+                            <label class="form-label" for="formGroupExampleInput">Enter your Username</label>
+                            <input type="text" name="uname" class="form-control form-traffico-control" id="formGroupExampleInput" placeholder="Enter your Username"><br>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label" for="formGroupExampleInput2">Enter your password</label>
+                            <input type="password" name="pswd" class="form-control form-traffico-control" id="formGroupExampleInput2" placeholder="Enter your password">
+                          </div>
+                          <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Login
+                              <svg class="bi bi-arrow-right ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                              </svg>
+                            </button>
+                          </div>
+                        </form>
+                        <!-- <form method="post" >
+                          {% csrf_token %}
+                            <input type="text" name="uname" class="form-control" placeholder="Enter your Username"><br>
+                            <input type="password" name="pswd" class="form-control" placeholder="Enter your password"><br><br>
+                            <button type="submit" class="btn btn-outline-primary">Login</button>
+                        </form> -->
+                        Dont Have account click<a href="{%url 'SignUp'%}"> Here</a>
+                    </div>
+                    <div class="col-md-6" style="height: 500px;"></div>
+            </div>
+
+        </div>
+      </section>
+
+
+      <div class="footer" style="padding: 30px;text-align: center;background-color: rgb(226, 237, 237);position: relative;top: 700px;">
+        all rignts reserverd &copy; 
+      </div>
+      
+      <!-- ============================================-->
+      <!-- <section> begin ============================-->
+        <!-- <section class="py-5" style="z-index: 0;">
+
+            <div class="container" style="margin-top: 400px;z-index: 0 !important;">
+              <div class="row flex-center">
+                <div class="col-md-6 col-xl-8 order-0">
+                  <p class="text-center text-md-start">All rights Reserved &copy; Your Company, 2021</p>
+                </div>
+                <div class="col-md-6 col-xl-3 order-1">
+                  <p class="text-center text-md-end text-xl-start">Made with&nbsp;
+                    <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#EE4D47" viewBox="0 0 16 16">
+                      <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
+                    </svg>&nbsp;by&nbsp;<a class="text-1000 fw-bold" href="" target="_blank"> </a>
+                  </p>
+                 
+                </div>
+              </div>
+            </div>
+            <!-- end of .container-->
+    
+          </section> -->
+          <!-- <section> close ============================-->
+          <!-- ============================================-->
+    
+    
+        </main>
+        <!-- ===============================================-->
+        <!--    End of Main Content-->
+        <!-- ===============================================-->
+    
+    
+    
+    
+        <!-- ===============================================-->
+        <!--    JavaScripts-->
+        <!-- ===============================================-->
+        <script src="{%static 'vendors/@popperjs/popper.min.js' %}"></script>
+        <script src="{%static 'vendors/bootstrap/bootstrap.min.js' %}"></script>
+        <script src="{%static 'vendors/is/is.min.js' %}"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+        <script src="{%static 'vendors/fontawesome/all.min.js' %}"></script>
+        <script src="{%static 'assets/js/theme.js' %}"></script>
+    
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Rubik:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+      </body>
+    
+    </html>

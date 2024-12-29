@@ -1,0 +1,127 @@
+{% extends 'staff/index.html' %}
+{% block admin %}
+
+<style>
+    .content ul {
+        list-style: none;
+
+    }
+
+    .content li {
+        float: left;
+        padding: 30px;
+
+    }
+
+    .content li p {
+        font-size: larger;
+        font-weight: 700;
+    }
+    .card i{
+        color: blueviolet;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+
+    <div class="content">
+        <div class="card">
+            <ul>
+                <li>
+                    <p><i>Request Id: </i> {{req.id}}</p>
+                </li>
+                <li>
+                    <p><i>Date: </i> {{req.request_date}}</p>
+                </li>
+                <li>
+                    <p><i>Status: </i> {{req.garbage_status}}</p>
+                </li>
+                <li>
+                    <p><i>Driver: </i> {{req.driver}}</p>
+                </li>
+                <li>
+                    <p><i>estimated Time: </i> {{req.collection_date_time}}</p>
+                </li>
+                <li>
+                    <p><i>Collected Time: </i> {{req.collected_time}}</p>
+                </li>
+            </ul>
+            {% for message in messages %}
+            <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>Hai!</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+
+        </div>
+        <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Assign Driver</a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Assign Driver</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{%url 'assign_driver_staff' req.id %}" method="post">
+                            {% csrf_token %}
+                            <br>
+                            <select name="driver" id="" class="form-control" required>
+                                <option value="" selected disabled>--------------------</option>
+                                {% for i in drivers %}
+                                <option value="{{i.id}}">{{i}}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <label for="Estimated Collected Time">Estimated Collected Time</label>
+                            <input type="datetime-local" class="form-control" name="datetime" id="datetimeField" required>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Save</button>
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <h4 class="text-primary">Garbages</h4>
+
+        <div class="container">
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Garbage</th>
+                    <th>Weight</th>
+                    <th>action</th>
+                </tr>
+                {% for i in garbages %}
+                <tr>
+                    <td>{{i.garbage_item}}</td>
+                    <td>{{i.weight}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Get the current date and time
+    const now = new Date();
+
+    // Format the date and time to match the 'datetime-local' input format
+    const formattedDateTime = now.toISOString().slice(0, 16);
+
+    // Set the min attribute of the input field
+    document.getElementById("datetimeField").min = formattedDateTime;
+</script>
+
+{% endblock %}

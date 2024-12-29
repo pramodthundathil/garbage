@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+{% block content %}
+<style>
+    .content ul {
+        list-style: none;
+
+    }
+
+    .content li {
+        float: left;
+        padding: 30px;
+
+    }
+
+    .content li p {
+        font-size: larger;
+        font-weight: 700;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+
+    <div class="content" style="margin-top: 200px;">
+        <div class="card">
+            <ul>
+                <li>
+                    <p><i>Request Id: </i> {{req.id}}</p>
+                </li>
+                <li>
+                    <p><i>Date: </i> {{req.request_date}}</p>
+                </li>
+                <li>
+                    <p><i>Status: </i> {{req.garbage_status}}</p>
+                </li>
+            </ul>
+            {% for message in messages %}
+            <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>Hai!</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            <a href="" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Garbage</a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Garbage</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post">
+                                {% csrf_token %}
+
+                                {{form.as_p}}
+                                <button type="submit" class="btn btn-primary">Add Garbage</button>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <h4 class="text-primary">Garbages</h4>
+
+        <div class="container">
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Garbage</th>
+                <th>Weight</th>
+                <th>action</th>
+            </tr>
+            {% for i in garbages%}
+            <tr>
+                <td>{{i.garbage_item}}</td>
+                <td>{{i.weight}}</td>
+                <td><a href="{%url 'delete_garbage_from_request' i.id%}" class="btn btn-danger btn-sm">delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'admin/index.html' %}
+{% block admin %}
+
+<div class="container mt-4">
+    <h4 class="text-primary">Collection requests</h4>
+    <!-- User Details Table -->
+    <table class="table table-striped table-bordered" id="userTable">
+        <thead>
+            <tr>
+                <th>Sl No</th>
+                <th>Id number</th>
+                <th>Requested By</th>
+                <th>Requested date</th>
+                <th>Staff</th>
+                <th>Driver</th>
+                <th>Status</th>
+                <th>Completion Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example row -->
+            {% for re in req %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{re.id}}</td>
+                <td>{{re.requested_by}}</td>
+                <td>{{re.request_date}}</td>
+                <td>{{re.updated_staff}}</td>
+                <td>{{re.driver}}</td>
+                <td>{{re.garbage_status}}</td>
+                <th>
+                    {% if re.visibility == True %}
+                    <span class="badge bg-warning">Ongoing</span>
+                    {% else %}
+                    <span class="badge bg-success">Completed</span>
+                    {% endif %}
+
+                </th>
+                <td>
+                    <a href="{%url 'view_collection_request_single' re.id %}" class="btn btn-warning btn-sm">View</a>
+                    <a href="" onclick="return confirm('Are you sure want to delete')" class="btn btn-danger btn-sm">delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}
